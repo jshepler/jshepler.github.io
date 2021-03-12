@@ -1,0 +1,16 @@
+#currentAmountsTable {
+    margin-top: 50px;
+}
+
+#currentAmountsTable input {
+    width: 120px;
+    text-align: right;
+}
+
+#currentAmountsTable th {
+    background-color: #ececec;
+}
+
+#currentAmountsTable td {
+    text-align: right;
+}

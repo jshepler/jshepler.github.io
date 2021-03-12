@@ -4,10 +4,95 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>NGU tools</title>
 </head>
 <body>
     <table>
+        <tr>
+            <th></th>
+            <th>P</th>
+            <th>C</th>
+            <th>B</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>ratio:</td>
+            <td><input data-bind="textInput: pcbRatio_P" style="width:20px; text-align:center;" /></td>
+            <td><input data-bind="textInput: pcbRatio_C" style="width:60px; text-align:center;" /></td>
+            <td><input data-bind="textInput: pcbRatio_B" style="width:20px; text-align:center;" /></td>
+            <td><select data-bind="options: ratioPresets, optionsText: 'label', value: selectedRatioPreset, optionsCaption: 'preset'"></select></td>
+        </tr>
+    </table>
+
+    <table id="currentAmountsTable">
+        <tr>
+            <td></td>
+            <th colspan="3">energy</th>
+            <td></td>
+            <th colspan="3">magic</th>
+            <td></td>
+            <th colspan="3">R3</th>
+        </tr>
+        <tr>
+            <td></td>
+            <th>power</th>
+            <th>cap</th>
+            <th>bars</th>
+            <td></td>
+            <th>power</th>
+            <th>cap</th>
+            <th>bars</th>
+            <td></td>
+            <th>power</th>
+            <th>cap</th>
+            <th>bars</th>
+        </tr>
+        <tr>
+            <td>base</td>
+            <td><input data-bind="textInput: base.energy.power" /></td>
+            <td><input data-bind="textInput: base.energy.cap" /></td>
+            <td><input data-bind="textInput: base.energy.bars" /></td>
+            <td>base</td>
+            <td><input data-bind="textInput: base.magic.power" /></td>
+            <td><input data-bind="textInput: base.magic.cap" /></td>
+            <td><input data-bind="textInput: base.magic.bars" /></td>
+            <td>base</td>
+            <td><input data-bind="textInput: base.r3.power" /></td>
+            <td><input data-bind="textInput: base.r3.cap" /></td>
+            <td><input data-bind="textInput: base.r3.bars" /></td>
+        </tr>
+        <tr>
+            <td>need</td>
+            <td data-bind="text: needs.energy.power"></td>
+            <td data-bind="text: needs.energy.cap"></td>
+            <td data-bind="text: needs.energy.bars"></td>
+            <td>need</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>need</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>exp</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>exp</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>exp</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+
+    <table style="margin-top: 50px;">
         <tr>
             <th>Energy</th>
             <th>Power</th>
@@ -87,86 +172,6 @@
     </table>
 
     <script type='text/javascript' src='knockout-3.5.1.js'></script>
-    <script>
-        (function() {
-            let cost = {
-                EP: 150,
-                EC: (40 / 10000),
-                EB: 80,
-                MP: 450,
-                MC: (120 / 10000),
-                MB: 240,
-                R3P: 15e+6,
-                R3C: (4e+6 / 10000),
-                R3B: 8e+6
-            };
-            
-            let ratio = {P: 2, C: 75000, B: 5};
-            let ratioCost = {
-                EP: ratio.P * cost.EP,
-                EC: ratio.C * cost.EC,
-                EB: ratio.B * cost.EB,
-                MP: ratio.P * cost.MP,
-                MC: ratio.C * cost.MC,
-                MB: ratio.B * cost.MB,
-                R3P: ratio.P * cost.R3P,
-                R3C: ratio.C * cost.R3C,
-                R3B: ratio.B * cost.R3B
-            };
-
-            let ratioCostTotal = {
-                E: ratioCost.EP + ratioCost.EC + ratioCost.EB,
-                M: ratioCost.MP + ratioCost.MC + ratioCost.MB,
-                R3: ratioCost.R3P + ratioCost.R3C + ratioCost.R3B
-            };
-
-            let expPct = {
-                EP: ratioCost.EP / ratioCostTotal.E,
-                EC: ratioCost.EC / ratioCostTotal.E,
-                EB: ratioCost.EB / ratioCostTotal.E,
-                MP: ratioCost.MP / ratioCostTotal.M,
-                MC: ratioCost.MC / ratioCostTotal.M,
-                MB: ratioCost.MB / ratioCostTotal.M,
-                R3P: ratioCost.R3P / ratioCostTotal.R3,
-                R3C: ratioCost.R3C / ratioCostTotal.R3,
-                R3B: ratioCost.R3B / ratioCostTotal.R3
-            };
-
-            let vm = {
-                totalEnergyExpSpend: ko.observable(1e+9),
-                totalMagicExpSpend: ko.observable(1e+9),
-                totalR3ExpSpend: ko.observable(1e+9)
-            };
-
-            vm.EPexp = ko.computed(() => (vm.totalEnergyExpSpend() * expPct.EP).toFixed(0));
-            vm.EPamount = ko.computed(() => (vm.EPexp() / cost.EP).toFixed(0));
-
-            vm.ECexp = ko.computed(() => (vm.totalEnergyExpSpend() * expPct.EC).toFixed(0));
-            vm.ECamount = ko.computed(() => (vm.ECexp() / cost.EC).toFixed(0));
-
-            vm.EBexp = ko.computed(() => (vm.totalEnergyExpSpend() * expPct.EB).toFixed(0));
-            vm.EBamount = ko.computed(() => (vm.EBexp() / cost.EB).toFixed(0));
-
-            vm.MPexp = ko.computed(() => (vm.totalMagicExpSpend() * expPct.MP).toFixed(0));
-            vm.MPamount = ko.computed(() => (vm.MPexp() / cost.MP).toFixed(0));
-
-            vm.MCexp = ko.computed(() => (vm.totalMagicExpSpend() * expPct.MC).toFixed(0));
-            vm.MCamount = ko.computed(() => (vm.MCexp() / cost.MC).toFixed(0));
-
-            vm.MBexp = ko.computed(() => (vm.totalMagicExpSpend() * expPct.MB).toFixed(0));
-            vm.MBamount = ko.computed(() => (vm.MBexp() / cost.MB).toFixed(0));
-
-            vm.R3Pexp = ko.computed(() => (vm.totalR3ExpSpend() * expPct.R3P).toFixed(0));
-            vm.R3Pamount = ko.computed(() => (vm.R3Pexp() / cost.R3P).toFixed(0));
-
-            vm.R3Cexp = ko.computed(() => (vm.totalR3ExpSpend() * expPct.R3C).toFixed(0));
-            vm.R3Camount = ko.computed(() => (vm.R3Cexp() / cost.R3C).toFixed(0));
-
-            vm.R3Bexp = ko.computed(() => (vm.totalR3ExpSpend() * expPct.R3B).toFixed(0));
-            vm.R3Bamount = ko.computed(() => (vm.R3Bexp() / cost.R3B).toFixed(0));
-
-            ko.applyBindings(vm);
-        })();
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
