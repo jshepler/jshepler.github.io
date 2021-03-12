@@ -22,31 +22,35 @@
         return target;
     };
 
-    function calcNeeds(rp, rc, rb, bp, bc, bb) {
+    function calcShouldBe(ratioPower, ratioCap, ratioBars, currentPower, currentCap, currentBars) {
         // pass 1 based on power
-        let powerNeeded = bp;
-        let capNeeded = powerNeeded / rp * rc;
-        let barsNeeded = powerNeeded / rp * rb;
+        let powerShouldBe = currentPower;
+        let capShouldBe = powerShouldBe / ratioPower * ratioCap;
+        let barsShouldBe = powerShouldBe / ratioPower * ratioBars;
 
-        // if current cap and bars are both less than needed, we're done
-        if(bc <= capNeeded && bb <= barsNeeded) {
-            return { power: powerNeeded - bp, cap: capNeeded - bc, bars: barsNeeded - bb };
+        if(currentCap > capShouldBe || currentBars > barsShouldBe) {
+            let capDiffNormalized = (currentCap - capShouldBe) / ratioCap;
+            let barsDiffNormalized = (currentBars - barsShouldBe) / ratioBars;
+
+            if(capDiffNormalized > barsDiffNormalized) {
+                capShouldBe = currentCap;
+                powerShouldBe = currentCap / ratioCap * ratioPower;
+                barsShouldBe = powerShouldBe / ratioPower * ratioBars;
+            } else {
+                barsShouldBe = currentBars;
+                powerShouldBe = currentBars / ratioBars * ratioPower;
+                capShouldBe = powerShouldBe / ratioPower * ratioCap;
+            }
+
+            // capShouldBe = powerShouldBe / ratioPower * ratioCap;
+            // barsShouldBe = powerShouldBe / ratioPower * ratioBars;
         }
 
-        // else, normalize accounting for ratio and biggest overage is used to calculate new power and re-calc needed
-        let capDiffNormalized = (bc - capNeeded) / rc;
-        let barsDiffNormalized = (bb - barsNeeded) / rb;
-
-        if(capDiffNormalized < barsDiffNormalized) {
-            powerNeeded = capNeeded / rc * rp;
-        } else {
-            powerNeeded = barsNeeded / rb * rp;
+        return {
+            power: +powerShouldBe.toFixed(0),
+            cap: +capShouldBe.toFixed(0),
+            bars: +barsShouldBe.toFixed(0)
         }
-
-        capNeeded = powerNeeded / rp * rc;
-        barsNeeded = powerNeeded / rp * rb;
-
-        return { power: powerNeeded - bp, cap: capNeeded - bc, bars: barsNeeded - bb };
     }
 
     let costs = {
@@ -94,8 +98,52 @@
                 bars: ko.observable(0).extend({persist: "base.r3.bars"})
             }
         },
+        shouldBe: {
+            energy: {
+                power: ko.observable(),
+                cap: ko.observable(),
+                bars: ko.observable()
+            },
+            magic: {
+                power: ko.observable(),
+                cap: ko.observable(),
+                bars: ko.observable()
+            },
+            r3: {
+                power: ko.observable(),
+                cap: ko.observable(),
+                bars: ko.observable()
+            }
+        },
         needs: {
             energy: {
+                power: ko.observable(),
+                cap: ko.observable(),
+                bars: ko.observable()
+            },
+            magic: {
+                power: ko.observable(),
+                cap: ko.observable(),
+                bars: ko.observable()
+            },
+            r3: {
+                power: ko.observable(),
+                cap: ko.observable(),
+                bars: ko.observable()
+            }
+        },
+        expNeeded: {
+            energy: {
+                power: ko.observable(),
+                cap: ko.observable(),
+                bars: ko.observable()
+            },
+            magic: {
+                power: ko.observable(),
+                cap: ko.observable(),
+                bars: ko.observable()
+            },
+            r3: {
                 power: ko.observable(),
                 cap: ko.observable(),
                 bars: ko.observable()
@@ -113,17 +161,69 @@
     });
 
     ko.computed(() => {
-        let rp = vm.pcbRatio_P();
-        let rc = vm.pcbRatio_C();
-        let rb = vm.pcbRatio_B();
-        let bp = vm.base.energy.power();
-        let bc = vm.base.energy.cap();
-        let bb = vm.base.energy.bars();
-        let needs = calcNeeds(rp, rc, rb, bp, bc, bb);
+        let rp = +vm.pcbRatio_P();
+        let rc = +vm.pcbRatio_C();
+        let rb = +vm.pcbRatio_B();
+        let currentPower = +vm.base.energy.power();
+        let currentCap = +vm.base.energy.cap();
+        let currentBars = +vm.base.energy.bars();
+        let shouldBe = calcShouldBe(rp, rc, rb, currentPower, currentCap, currentBars);
 
-        vm.needs.energy.power(needs.power.toFixed(0));
-        vm.needs.energy.cap(needs.cap.toFixed(0));
-        vm.needs.energy.bars(needs.bars.toFixed(0));
+        vm.shouldBe.energy.power(shouldBe.power);
+        vm.shouldBe.energy.cap(shouldBe.cap);
+        vm.shouldBe.energy.bars(shouldBe.bars);
+
+        vm.needs.energy.power(shouldBe.power - currentPower);
+        vm.needs.energy.cap(shouldBe.cap - currentCap);
+        vm.needs.energy.bars(shouldBe.bars - currentBars);
+
+        vm.expNeeded.energy.power((shouldBe.power - currentPower) * costs.EP);
+        vm.expNeeded.energy.cap((shouldBe.cap - currentCap) * costs.EC);
+        vm.expNeeded.energy.bars((shouldBe.bars - currentBars) * costs.EB);
+    });
+
+    ko.computed(() => {
+        let rp = +vm.pcbRatio_P();
+        let rc = +vm.pcbRatio_C();
+        let rb = +vm.pcbRatio_B();
+        let currentPower = +vm.base.magic.power();
+        let currentCap = +vm.base.magic.cap();
+        let currentBars = +vm.base.magic.bars();
+        let shouldBe = calcShouldBe(rp, rc, rb, currentPower, currentCap, currentBars);
+
+        vm.shouldBe.magic.power(shouldBe.power);
+        vm.shouldBe.magic.cap(shouldBe.cap);
+        vm.shouldBe.magic.bars(shouldBe.bars);
+
+        vm.needs.magic.power(shouldBe.power - currentPower);
+        vm.needs.magic.cap(shouldBe.cap - currentCap);
+        vm.needs.magic.bars(shouldBe.bars - currentBars);
+
+        vm.expNeeded.magic.power((shouldBe.power - currentPower) * costs.MP);
+        vm.expNeeded.magic.cap((shouldBe.cap - currentCap) * costs.MC);
+        vm.expNeeded.magic.bars((shouldBe.bars - currentBars) * costs.MB);
+    });
+
+    ko.computed(() => {
+        let rp = +vm.pcbRatio_P();
+        let rc = +vm.pcbRatio_C();
+        let rb = +vm.pcbRatio_B();
+        let currentPower = +vm.base.r3.power();
+        let currentCap = +vm.base.r3.cap();
+        let currentBars = +vm.base.r3.bars();
+        let shouldBe = calcShouldBe(rp, rc, rb, currentPower, currentCap, currentBars);
+
+        vm.shouldBe.r3.power(shouldBe.power);
+        vm.shouldBe.r3.cap(shouldBe.cap);
+        vm.shouldBe.r3.bars(shouldBe.bars);
+
+        vm.needs.r3.power(shouldBe.power - currentPower);
+        vm.needs.r3.cap(shouldBe.cap - currentCap);
+        vm.needs.r3.bars(shouldBe.bars - currentBars);
+
+        vm.expNeeded.r3.power((shouldBe.power - currentPower) * costs.R3P);
+        vm.expNeeded.r3.cap((shouldBe.cap - currentCap) * costs.R3C);
+        vm.expNeeded.r3.bars((shouldBe.bars - currentBars) * costs.R3B);
     });
 
     vm.expPcts = ko.computed(() => {
