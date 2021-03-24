@@ -262,25 +262,25 @@
         };
     });
 
-    vm.EPexp = ko.computed(() => (vm.totalEnergyExpSpend() * vm.expPcts().EP).toFixed(0));
-    vm.ECexp = ko.computed(() => (vm.totalEnergyExpSpend() * vm.expPcts().EC).toFixed(0));
-    vm.EBexp = ko.computed(() => (vm.totalEnergyExpSpend() * vm.expPcts().EB).toFixed(0));
-    vm.MPexp = ko.computed(() => (vm.totalMagicExpSpend() * vm.expPcts().MP).toFixed(0));
-    vm.MCexp = ko.computed(() => (vm.totalMagicExpSpend() * vm.expPcts().MC).toFixed(0));
-    vm.MBexp = ko.computed(() => (vm.totalMagicExpSpend() * vm.expPcts().MB).toFixed(0));
-    vm.R3Pexp = ko.computed(() => (vm.totalR3ExpSpend() * vm.expPcts().R3P).toFixed(0));
-    vm.R3Cexp = ko.computed(() => (vm.totalR3ExpSpend() * vm.expPcts().R3C).toFixed(0));
-    vm.R3Bexp = ko.computed(() => (vm.totalR3ExpSpend() * vm.expPcts().R3B).toFixed(0));
+    vm.EPexp = ko.computed(() => +(vm.totalEnergyExpSpend() * vm.expPcts().EP).toFixed(0));
+    vm.ECexp = ko.computed(() => +(vm.totalEnergyExpSpend() * vm.expPcts().EC).toFixed(0));
+    vm.EBexp = ko.computed(() => +(vm.totalEnergyExpSpend() * vm.expPcts().EB).toFixed(0));
+    vm.MPexp = ko.computed(() => +(vm.totalMagicExpSpend() * vm.expPcts().MP).toFixed(0));
+    vm.MCexp = ko.computed(() => +(vm.totalMagicExpSpend() * vm.expPcts().MC).toFixed(0));
+    vm.MBexp = ko.computed(() => +(vm.totalMagicExpSpend() * vm.expPcts().MB).toFixed(0));
+    vm.R3Pexp = ko.computed(() => +(vm.totalR3ExpSpend() * vm.expPcts().R3P).toFixed(0));
+    vm.R3Cexp = ko.computed(() => +(vm.totalR3ExpSpend() * vm.expPcts().R3C).toFixed(0));
+    vm.R3Bexp = ko.computed(() => +(vm.totalR3ExpSpend() * vm.expPcts().R3B).toFixed(0));
 
-    vm.EPamount = ko.computed(() => (vm.EPexp() / costs.EP).toFixed(0));
-    vm.ECamount = ko.computed(() => (vm.ECexp() / costs.EC).toFixed(0));
-    vm.EBamount = ko.computed(() => (vm.EBexp() / costs.EB).toFixed(0));
-    vm.MPamount = ko.computed(() => (vm.MPexp() / costs.MP).toFixed(0));
-    vm.MCamount = ko.computed(() => (vm.MCexp() / costs.MC).toFixed(0));
-    vm.MBamount = ko.computed(() => (vm.MBexp() / costs.MB).toFixed(0));
-    vm.R3Pamount = ko.computed(() => (vm.R3Pexp() / costs.R3P).toFixed(0));
-    vm.R3Camount = ko.computed(() => (vm.R3Cexp() / costs.R3C).toFixed(0));
-    vm.R3Bamount = ko.computed(() => (vm.R3Bexp() / costs.R3B).toFixed(0));
+    vm.EPamount = ko.computed(() => +(vm.EPexp() / costs.EP).toFixed(0));
+    vm.ECamount = ko.computed(() => +(vm.ECexp() / costs.EC).toFixed(0));
+    vm.EBamount = ko.computed(() => +(vm.EBexp() / costs.EB).toFixed(0));
+    vm.MPamount = ko.computed(() => +(vm.MPexp() / costs.MP).toFixed(0));
+    vm.MCamount = ko.computed(() => +(vm.MCexp() / costs.MC).toFixed(0));
+    vm.MBamount = ko.computed(() => +(vm.MBexp() / costs.MB).toFixed(0));
+    vm.R3Pamount = ko.computed(() => +(vm.R3Pexp() / costs.R3P).toFixed(0));
+    vm.R3Camount = ko.computed(() => +(vm.R3Cexp() / costs.R3C).toFixed(0));
+    vm.R3Bamount = ko.computed(() => +(vm.R3Bexp() / costs.R3B).toFixed(0));
 
     ko.applyBindings(vm);
 })();
