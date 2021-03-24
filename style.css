@@ -14,3 +14,21 @@
 #currentAmountsTable td {
     text-align: right;
 }
+
+#buyAmountsTable {
+    margin-top: 50px;
+}
+
+#buyAmountsTable input {
+    width: 220px;
+    text-align: right;
+}
+
+#buyAmountsTable th {
+    background-color: #ececec;
+}
+
+#buyAmountsTable td {
+    text-align: right;
+    padding: 0 5px;
+}
