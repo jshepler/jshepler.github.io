@@ -50,17 +50,17 @@
         </tr>
         <tr>
             <td>base</td>
-            <td><input data-bind="textInput: base.energy.power" /></td>
-            <td><input data-bind="textInput: base.energy.cap" /></td>
-            <td><input data-bind="textInput: base.energy.bars" /></td>
+            <td><input type="number" data-bind="textInput: base.energy.power, attr: { step: pcbRatio_P }" /></td>
+            <td><input type="number" data-bind="textInput: base.energy.cap, attr: { step: pcbRatio_C }" /></td>
+            <td><input type="number" data-bind="textInput: base.energy.bars, attr: { step: pcbRatio_B }" /></td>
             <td>base</td>
-            <td><input data-bind="textInput: base.magic.power" /></td>
-            <td><input data-bind="textInput: base.magic.cap" /></td>
-            <td><input data-bind="textInput: base.magic.bars" /></td>
+            <td><input type="number" data-bind="textInput: base.magic.power, attr: { step: pcbRatio_P }" /></td>
+            <td><input type="number" step="500" data-bind="textInput: base.magic.cap, attr: { step: pcbRatio_C }" /></td>
+            <td><input type="number" data-bind="textInput: base.magic.bars, attr: { step: pcbRatio_B }" /></td>
             <td>base</td>
-            <td><input data-bind="textInput: base.r3.power" /></td>
-            <td><input data-bind="textInput: base.r3.cap" /></td>
-            <td><input data-bind="textInput: base.r3.bars" /></td>
+            <td><input type="number" data-bind="textInput: base.r3.power, attr: { step: pcbRatio_P }" /></td>
+            <td><input type="number" step="500" data-bind="textInput: base.r3.cap, attr: { step: pcbRatio_C }" /></td>
+            <td><input type="number" data-bind="textInput: base.r3.bars, attr: { step: pcbRatio_B }" /></td>
         </tr>
         <tr>
             <td>should be</td>
