@@ -74,12 +74,36 @@
         { label: "custom", p: 0, c: 0, b: 0 }
     ];
 
+    let fruitTierUpgradeMultipliers = [
+        ["FoG", 1],
+        ["FoPa", 10],
+        ["FoA", 25],
+        ["FoK", 40],
+        ["Pom", 60],
+        ["FoL", 100],
+        ["FoPb", 150],
+        ["FoAr", 170],
+        ["FoN", 200],
+        ["FoR", 2000],
+        ["FoMa", 15000],
+        ["FoPc", 30000],
+        ["Wat", 50000],
+        ["FoMb", 100000],
+        ["FoQ", 25000],
+        ["Mayo", 250000]
+    ];
+
     let vm = {
         pcbRatio_P: ko.observable(2).extend({persist: "pcbRatio_P"}),
         pcbRatio_C: ko.observable(75000).extend({persist: "pcbRatio_C"}),
         pcbRatio_B: ko.observable(5).extend({persist: "pcbRatio_B"}),
         ratioPresets: ratioPresets,
         selectedRatioPreset: ko.observable(),
+        fruits: fruitTierUpgradeMultipliers,
+        fruitTiers: [...Array(25).keys()],
+        selectedFruitMultiplier: ko.observable(),
+        selectedFruitUpgradeFromTier: ko.observable(0),
+        selectedFruitUpgradeToTier: ko.observable(10),
         
         base: {
             energy: {
@@ -281,6 +305,17 @@
     vm.R3Pamount = ko.computed(() => +(vm.R3Pexp() / costs.R3P).toFixed(0));
     vm.R3Camount = ko.computed(() => +(vm.R3Cexp() / costs.R3C).toFixed(0));
     vm.R3Bamount = ko.computed(() => +(vm.R3Bexp() / costs.R3B).toFixed(0));
+
+    vm.totalFruitUpgradeSeeds = ko.computed(() => {
+        var multiplier = vm.selectedFruitMultiplier();
+        var fromTier = vm.selectedFruitUpgradeFromTier();
+        var toTier = vm.selectedFruitUpgradeToTier();
+        var seeds = 0;
+
+        for(var x = fromTier+1; x <= toTier; x++) seeds += x * x * multiplier;
+
+        return seeds;
+    });
 
     ko.applyBindings(vm);
 })();

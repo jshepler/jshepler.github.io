@@ -32,3 +32,26 @@
     text-align: right;
     padding: 0 5px;
 }
+
+#fruitsTable {
+    margin-top: 50px;
+}
+
+.fruitTierRadio {
+    display: none;
+}
+
+.fruitTierRadioLabel {
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+    border: solid 1px #333;
+}
+
+.fruitTierRadioLabel:hover {
+    background-color: #ececec;
+}
+
+.fruitTierRadio:checked + label {
+    background-color: #ff0;
+}

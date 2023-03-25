@@ -176,6 +176,29 @@
         </tr>
     </table>
 
+    <table id="fruitsTable">
+        <tr>
+            <td rowspan="2">upgrade <select data-bind="options: fruits, optionsText: '0', optionsValue: '1', value: selectedFruitMultiplier"></select></td>
+            <td>from tier: </td>
+            <!-- ko foreach: fruitTiers -->
+            <td>
+                <input type="radio" class="fruitTierRadio" name="fromTier" data-bind="attr: { id: 'fromTier' + $data }, checkedValue: $data, checked: $parent.selectedFruitUpgradeFromTier" />
+                <label class="fruitTierRadioLabel" data-bind="attr: { for: 'fromTier' + $data }, text: $data" />
+            </td>
+            <!-- /ko -->
+            <td rowspan="2" style="font-size: 2em;" data-bind="text: totalFruitUpgradeSeeds() + ' seeds'"></td>
+        </tr>
+        <tr>
+            <td>to tier: </td>
+            <!-- ko foreach: fruitTiers -->
+            <td>
+                <input type="radio" class="fruitTierRadio" name="toTier" data-bind="attr: { id: 'toTier' + $data }, checkedValue: $data, checked: $parent.selectedFruitUpgradeToTier" />
+                <label class="fruitTierRadioLabel" data-bind="attr: { for: 'toTier' + $data }, text: $data" />
+            </td>
+            <!-- /ko -->
+        </tr>
+    </table>
+
     <script type='text/javascript' src='knockout-3.5.1.js'></script>
     <script src="app.js"></script>
 </body>
