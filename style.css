@@ -55,3 +55,23 @@
 .fruitTierRadio:checked + label {
     background-color: #ff0;
 }
+
+#dcTable {
+    margin-top: 50px;
+}
+
+#dcTable th {
+    background-color: #ececec;
+}
+
+#dcTable td {
+    width: 110px;
+    text-align: center;
+}
+
+#dcTable input[type=text] {
+    text-align: right;
+    border: none;
+    background-color: rgb(255, 255, 187);
+    box-shadow: 0 0 1px 1px #ececec inset;
+}

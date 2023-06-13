@@ -199,6 +199,30 @@
         </tr>
     </table>
 
+    <table id="dcTable">
+        <tr>
+            <th colspan="2" style="background-color: white;"></th>
+            <th colspan="3">Item DC</th>
+            <th style="background-color: white;"></th>
+        </tr>
+        <tr>
+            <th>Total DC</th>
+            <th>cube-root</th>
+            <th>base</th>
+            <th>max</th>
+            <th>current</th>
+            <th>DC for max</th>
+        </tr>
+        <tr>
+            <td><input type='text' data-bind="textInput: totalDCPct" onfocus="this.select()" style="width: 80px;" />%</td>
+            <td><input type="checkbox" data-bind="checked: cubeRootDC" /></td>
+            <td><input type='text' data-bind="textInput: itemBaseDCPct" onfocus="this.select()" style="width: 40px;" />%</td>
+            <td><input type='text' data-bind="textInput: itemMaxDCPct" onfocus="this.select()" style="width: 40px;" />%</td>
+            <td data-bind="text: itemCurrentDCPct() + '%'"></td>
+            <td data-bind="text: needTotalDCPctForMaxString"></td>
+        </tr>
+    </table>
+
     <script type='text/javascript' src='knockout-3.5.1.js'></script>
     <script src="app.js"></script>
 </body>

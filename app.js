@@ -104,6 +104,10 @@
         selectedFruitMultiplier: ko.observable(),
         selectedFruitUpgradeFromTier: ko.observable(0),
         selectedFruitUpgradeToTier: ko.observable(10),
+        totalDCPct: ko.observable(0).extend({persist: "totalDCPct"}),
+        cubeRootDC: ko.observable(false).extend({persist: "cubeRootDC"}),
+        itemBaseDCPct: ko.observable(0).extend({persist: "itemBaseDCPct"}),
+        itemMaxDCPct: ko.observable(0).extend({persist: "itemMaxDCPct"}),
         
         base: {
             energy: {
@@ -315,6 +319,40 @@
         for(var x = fromTier+1; x <= toTier; x++) seeds += x * x * multiplier;
 
         return seeds;
+    });
+
+    vm.effectiveDCPct = ko.computed(() => {
+        let totalDCPct = +vm.totalDCPct() / 100.0;
+        let cubeRootDC = vm.cubeRootDC();
+
+        return cubeRootDC ? Math.cbrt(totalDCPct) : totalDCPct;
+    });
+
+    vm.itemCurrentDCPct = ko.computed(() => {
+        let totalDC = +vm.effectiveDCPct();
+        let baseDC = +vm.itemBaseDCPct() / 100.0;
+        let maxDC = +vm.itemMaxDCPct() / 100.0;
+
+        let currentDC = baseDC * totalDC;
+        if(currentDC > maxDC && maxDC > 0) currentDC = maxDC;
+
+        return Number((currentDC * 100.0).toFixed(2));
+    });
+
+    vm.needTotalDCPctForMax = ko.computed(() => {
+        let baseDC = +vm.itemBaseDCPct() / 100.0;
+        let maxDC = +vm.itemMaxDCPct() / 100.0;
+        let cubeRootDC = vm.cubeRootDC();
+        let pow = cubeRootDC ? 3 : 1;
+
+        return Number(Math.pow((maxDC / baseDC) * 100.0, pow).toFixed(3));
+    });
+
+    vm.needTotalDCPctForMaxString = ko.computed(() => {
+        let need = vm.needTotalDCPctForMax();
+
+        if(need >= 1e+4) return need.toExponential(3) + "%";
+        else return "" + need + "%";
     });
 
     ko.applyBindings(vm);
