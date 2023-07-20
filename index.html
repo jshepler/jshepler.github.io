@@ -64,45 +64,45 @@
         </tr>
         <tr>
             <td>should be</td>
-            <td data-bind="text: shouldBe.energy.power"></td>
-            <td data-bind="text: shouldBe.energy.cap"></td>
-            <td data-bind="text: shouldBe.energy.bars"></td>
+            <td data-bind="text: shouldBe.energy.power" class="padRight"></td>
+            <td data-bind="text: shouldBe.energy.cap" class="padRight"></td>
+            <td data-bind="text: shouldBe.energy.bars" class="padRight"></td>
             <td>should be</td>
-            <td data-bind="text: shouldBe.magic.power"></td>
-            <td data-bind="text: shouldBe.magic.cap"></td>
-            <td data-bind="text: shouldBe.magic.bars"></td>
+            <td data-bind="text: shouldBe.magic.power" class="padRight"></td>
+            <td data-bind="text: shouldBe.magic.cap" class="padRight"></td>
+            <td data-bind="text: shouldBe.magic.bars" class="padRight"></td>
             <td>should be</td>
-            <td data-bind="text: shouldBe.r3.power"></td>
-            <td data-bind="text: shouldBe.r3.cap"></td>
-            <td data-bind="text: shouldBe.r3.bars"></td>
+            <td data-bind="text: shouldBe.r3.power" class="padRight"></td>
+            <td data-bind="text: shouldBe.r3.cap" class="padRight"></td>
+            <td data-bind="text: shouldBe.r3.bars" class="padRight"></td>
         </tr>
         <tr>
             <td>need</td>
-            <td data-bind="text: needs.energy.power"></td>
-            <td data-bind="text: needs.energy.cap"></td>
-            <td data-bind="text: needs.energy.bars"></td>
+            <td data-bind="text: needs.energy.power" class="padRight"></td>
+            <td data-bind="text: needs.energy.cap" class="padRight"></td>
+            <td data-bind="text: needs.energy.bars" class="padRight"></td>
             <td>need</td>
-            <td data-bind="text: needs.magic.power"></td>
-            <td data-bind="text: needs.magic.cap"></td>
-            <td data-bind="text: needs.magic.bars"></td>
+            <td data-bind="text: needs.magic.power" class="padRight"></td>
+            <td data-bind="text: needs.magic.cap" class="padRight"></td>
+            <td data-bind="text: needs.magic.bars" class="padRight"></td>
             <td>need</td>
-            <td data-bind="text: needs.r3.power"></td>
-            <td data-bind="text: needs.r3.cap"></td>
-            <td data-bind="text: needs.r3.bars"></td>
+            <td data-bind="text: needs.r3.power" class="padRight"></td>
+            <td data-bind="text: needs.r3.cap" class="padRight"></td>
+            <td data-bind="text: needs.r3.bars" class="padRight"></td>
         </tr>
         <tr>
             <td>exp</td>
-            <td data-bind="text: expNeeded.energy.power"></td>
-            <td data-bind="text: expNeeded.energy.cap"></td>
-            <td data-bind="text: expNeeded.energy.bars"></td>
+            <td data-bind="text: expNeeded.energy.power" class="padRight"></td>
+            <td data-bind="text: expNeeded.energy.cap" class="padRight"></td>
+            <td data-bind="text: expNeeded.energy.bars" class="padRight"></td>
             <td>exp</td>
-            <td data-bind="text: expNeeded.magic.power"></td>
-            <td data-bind="text: expNeeded.magic.cap"></td>
-            <td data-bind="text: expNeeded.magic.bars"></td>
+            <td data-bind="text: expNeeded.magic.power" class="padRight"></td>
+            <td data-bind="text: expNeeded.magic.cap" class="padRight"></td>
+            <td data-bind="text: expNeeded.magic.bars" class="padRight"></td>
             <td>exp</td>
-            <td data-bind="text: expNeeded.r3.power"></td>
-            <td data-bind="text: expNeeded.r3.cap"></td>
-            <td data-bind="text: expNeeded.r3.bars"></td>
+            <td data-bind="text: expNeeded.r3.power" class="padRight"></td>
+            <td data-bind="text: expNeeded.r3.cap" class="padRight"></td>
+            <td data-bind="text: expNeeded.r3.bars" class="padRight"></td>
         </tr>
     </table>
 
@@ -178,8 +178,8 @@
 
     <table id="fruitsTable">
         <tr>
-            <td rowspan="2">upgrade <select data-bind="options: fruits, optionsText: '0', optionsValue: '1', value: selectedFruitMultiplier"></select></td>
-            <td>from tier: </td>
+            <td rowspan="2">fruit: <select data-bind="options: fruits, optionsText: '0', optionsValue: '1', value: selectedFruitMultiplier"></select></td>
+            <td style="text-align: right;">from tier: </td>
             <!-- ko foreach: fruitTiers -->
             <td>
                 <input type="radio" class="fruitTierRadio" name="fromTier" data-bind="attr: { id: 'fromTier' + $data }, checkedValue: $data, checked: $parent.selectedFruitUpgradeFromTier" />
@@ -189,7 +189,7 @@
             <td rowspan="2" style="font-size: 2em;" data-bind="text: totalFruitUpgradeSeeds() + ' seeds'"></td>
         </tr>
         <tr>
-            <td>to tier: </td>
+            <td style="text-align: right;">to tier: </td>
             <!-- ko foreach: fruitTiers -->
             <td>
                 <input type="radio" class="fruitTierRadio" name="toTier" data-bind="attr: { id: 'toTier' + $data }, checkedValue: $data, checked: $parent.selectedFruitUpgradeToTier" />

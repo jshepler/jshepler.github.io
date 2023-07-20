@@ -101,9 +101,9 @@
         selectedRatioPreset: ko.observable(),
         fruits: fruitTierUpgradeMultipliers,
         fruitTiers: [...Array(25).keys()],
-        selectedFruitMultiplier: ko.observable(),
-        selectedFruitUpgradeFromTier: ko.observable(0),
-        selectedFruitUpgradeToTier: ko.observable(10),
+        selectedFruitMultiplier: ko.observable().extend({persist: "selectedFruitMultiplier"}),
+        selectedFruitUpgradeFromTier: ko.observable(0).extend({persist: "selectedFruitUpgradeFromTier"}),
+        selectedFruitUpgradeToTier: ko.observable(10).extend({persist: "selectedFruitUpgradeToTier"}),
         totalDCPct: ko.observable(0).extend({persist: "totalDCPct"}),
         cubeRootDC: ko.observable(false).extend({persist: "cubeRootDC"}),
         itemBaseDCPct: ko.observable(0).extend({persist: "itemBaseDCPct"}),
@@ -271,22 +271,22 @@
             R3B: ratioB * costs.R3B
         };
 
-        let pctTotals = {
+        let totalCosts = {
             E: expCosts.EP + expCosts.EC + expCosts.EB,
             M: expCosts.MP + expCosts.MC + expCosts.MB,
             R3: expCosts.R3P + expCosts.R3C + expCosts.R3B
         };
 
         return {
-            EP: expCosts.EP / pctTotals.E,
-            EC: expCosts.EC / pctTotals.E,
-            EB: expCosts.EB / pctTotals.E,
-            MP: expCosts.MP / pctTotals.M,
-            MC: expCosts.MC / pctTotals.M,
-            MB: expCosts.MB / pctTotals.M,
-            R3P: expCosts.R3P / pctTotals.R3,
-            R3C: expCosts.R3C / pctTotals.R3,
-            R3B: expCosts.R3B / pctTotals.R3
+            EP: expCosts.EP / totalCosts.E,
+            EC: expCosts.EC / totalCosts.E,
+            EB: expCosts.EB / totalCosts.E,
+            MP: expCosts.MP / totalCosts.M,
+            MC: expCosts.MC / totalCosts.M,
+            MB: expCosts.MB / totalCosts.M,
+            R3P: expCosts.R3P / totalCosts.R3,
+            R3C: expCosts.R3C / totalCosts.R3,
+            R3B: expCosts.R3B / totalCosts.R3
         };
     });
 
@@ -318,7 +318,7 @@
 
         for(var x = fromTier+1; x <= toTier; x++) seeds += x * x * multiplier;
 
-        return seeds;
+        return seeds < 1e+6 ? seeds.toLocaleString() : seeds.toExponential(3);
     });
 
     vm.effectiveDCPct = ko.computed(() => {
@@ -345,7 +345,7 @@
         let cubeRootDC = vm.cubeRootDC();
         let pow = cubeRootDC ? 3 : 1;
 
-        return Number(Math.pow((maxDC / baseDC) * 100.0, pow).toFixed(3));
+        return Number((Math.pow((maxDC / baseDC), pow) * 100.0).toFixed(3));
     });
 
     vm.needTotalDCPctForMaxString = ko.computed(() => {

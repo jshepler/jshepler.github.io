@@ -15,6 +15,10 @@
     text-align: right;
 }
 
+.padRight {
+    padding-right: 20px;
+}
+
 #buyAmountsTable {
     margin-top: 50px;
 }
@@ -46,6 +50,7 @@
     width: 20px;
     text-align: center;
     border: solid 1px #333;
+    user-select: none;
 }
 
 .fruitTierRadioLabel:hover {
@@ -54,6 +59,7 @@
 
 .fruitTierRadio:checked + label {
     background-color: #ff0;
+    font-weight: bold;
 }
 
 #dcTable {
