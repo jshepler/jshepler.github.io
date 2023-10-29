@@ -71,6 +71,7 @@
         { label: "2 : 75k : 5", p: 2, c: 75000, b: 5 },
         { label: "3 : 75k : 2", p: 3, c: 75000, b: 2 },
         { label: "4 : 130k : 1", p: 4, c: 130000, b: 1 },
+        { label: "4 : 150k : 1", p: 4, c: 150000, b: 1 },
         { label: "custom", p: 0, c: 0, b: 0 }
     ];
 
@@ -181,6 +182,18 @@
         totalMagicExpSpend: ko.observable(1e+9).extend({persist: "totalMagicExpSpend"}),
         totalR3ExpSpend: ko.observable(1e+9).extend({persist: "totalR3ExpSpend"})
     };
+
+    vm.syncEP = e => vm.base.energy.power(vm.shouldBe.energy.power());
+    vm.syncEC = e => vm.base.energy.cap(vm.shouldBe.energy.cap());
+    vm.syncEB = e => vm.base.energy.bars(vm.shouldBe.energy.bars());
+
+    vm.syncMP = e => vm.base.magic.power(vm.shouldBe.magic.power());
+    vm.syncMC = e => vm.base.magic.cap(vm.shouldBe.magic.cap());
+    vm.syncMB = e => vm.base.magic.bars(vm.shouldBe.magic.bars());
+
+    vm.syncR3P = e => vm.base.r3.power(vm.shouldBe.r3.power());
+    vm.syncR3C = e => vm.base.r3.cap(vm.shouldBe.r3.cap());
+    vm.syncR3B = e => vm.base.r3.bars(vm.shouldBe.r3.bars());
 
     vm.selectedRatioPreset.subscribe(v => {
         vm.pcbRatio_P(v.p);

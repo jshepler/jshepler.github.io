@@ -81,3 +81,10 @@
     background-color: rgb(255, 255, 187);
     box-shadow: 0 0 1px 1px #ececec inset;
 }
+
+.syncButton
+{
+    float: right;
+    height: 16px;
+    line-height: 16px;
+}
