@@ -1,0 +1,123 @@
+#currentAmountsTable {
+    margin-top: 50px;
+    
+}
+
+
+#currentAmountsTable input {
+    width: 120px;
+    text-align: right;
+   
+}
+
+#currentAmountsTable th {
+     
+}
+
+#currentAmountsTable td {
+    text-align: right;
+     
+}
+
+.padRight {
+    padding-right: 20px;
+     
+}
+
+#buyAmountsTable {
+    margin-top: 50px;
+    
+}
+
+#buyAmountsTable input {
+    width: 220px;
+    text-align: right;
+    
+}
+
+#buyAmountsTable th {
+     
+}
+
+#buyAmountsTable td {
+    text-align: right;
+    padding: 0 5px;
+    
+}
+
+#fruitsTable {
+    margin-top: 50px;
+     
+}
+
+.fruitTierRadio {
+    display: none;
+     
+}
+
+.fruitTierRadioLabel {
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+    border: solid 1px #333;
+    user-select: none;
+    background-color: gray;
+   
+}
+
+.fruitTierRadioLabel:hover {
+    background-color: #ececec;
+     
+}
+
+.fruitTierRadio:checked + label {
+    background-color: #292929;
+    font-weight: bold;
+      
+}
+
+#dcTable {
+    margin-top: 50px;
+   
+}
+
+#dcTable th {
+      
+}
+
+#dcTable td {
+    width: 110px;
+    text-align: center;
+    
+}
+
+#dcTable input[type=text] {
+    text-align: right;
+    border: none;
+    box-shadow: 0 0 1px 1px #ececec inset; 
+}
+
+input{
+   background-color: #efefef;
+   border-color: white;
+   filter: invert(100%);
+}
+
+body{
+   color: white;
+   background-color: #494949;
+}
+
+select{
+   background-color: #696969;
+   color: white;
+}
+
+.syncButton{
+  background-color: #696969;
+  color: white;
+}
+
+.syncButton:hover {
+  background-color: #898989;
+  color: white;

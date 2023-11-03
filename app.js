@@ -95,6 +95,7 @@
     ];
 
     let vm = {
+        darkMode: ko.observable(false).extend({persist: "darkMode"}),
         pcbRatio_P: ko.observable(2).extend({persist: "pcbRatio_P"}),
         pcbRatio_C: ko.observable(75000).extend({persist: "pcbRatio_C"}),
         pcbRatio_B: ko.observable(5).extend({persist: "pcbRatio_B"}),
@@ -182,6 +183,8 @@
         totalMagicExpSpend: ko.observable(1e+9).extend({persist: "totalMagicExpSpend"}),
         totalR3ExpSpend: ko.observable(1e+9).extend({persist: "totalR3ExpSpend"})
     };
+
+    vm.darkMode.subscribe(v => document.querySelector("html").setAttribute("data-theme", v ? "dark" : "light"));
 
     vm.syncEP = e => vm.base.energy.power(vm.shouldBe.energy.power());
     vm.syncEC = e => vm.base.energy.cap(vm.shouldBe.energy.cap());
@@ -385,4 +388,7 @@
     };
 
     ko.applyBindings(vm);
+
+    vm.darkMode.valueHasMutated();
+    //document.querySelector("html").setAttribute("data-theme", vm.darkMode() ? "dark" : "light");
 })();

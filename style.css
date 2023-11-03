@@ -1,6 +1,43 @@
+[data-theme="light"] {
+    --color-bg: #ffffff;
+    --color-fg: #000000;
+    --color-shaded: #ececec;
+    --color-highlight: #ffff00;
+    --color-text-input-bg: #ffffbb;
+    --color-text-input-fg: #000000;
+    --color-text-input-border: #ffffff;
+}
+  
+[data-theme="dark"] {
+    --color-bg: #494949;
+    --color-fg: #ffffff;
+    --color-shaded: #494949c9;
+    --color-highlight: #292929;
+    --color-text-input-bg: #000044;
+    --color-text-input-fg: #ffffff;
+    --color-text-input-border: #000000;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+}
+
+input {
+    background-color: var(--color-text-input-bg);
+    border-color: var(--color-text-input-border);
+    color: var(--color-text-input-fg);
+ }
+
+ select {
+    background-color: var(--color-shaded);
+    color: var(--color-fg);
+ }
+ 
 #currentAmountsTable {
     margin-top: 50px;
 }
+
 
 #currentAmountsTable input {
     width: 120px;
@@ -8,7 +45,7 @@
 }
 
 #currentAmountsTable th {
-    background-color: #ececec;
+    background-color: var(--color-shaded);
 }
 
 #currentAmountsTable td {
@@ -26,10 +63,11 @@
 #buyAmountsTable input {
     width: 220px;
     text-align: right;
+    
 }
 
 #buyAmountsTable th {
-    background-color: #ececec;
+    background-color: var(--color-shaded);
 }
 
 #buyAmountsTable td {
@@ -39,6 +77,7 @@
 
 #fruitsTable {
     margin-top: 50px;
+     
 }
 
 .fruitTierRadio {
@@ -51,6 +90,7 @@
     text-align: center;
     border: solid 1px #333;
     user-select: none;
+    background-color: var(--color-shaded);
 }
 
 .fruitTierRadioLabel:hover {
@@ -58,7 +98,7 @@
 }
 
 .fruitTierRadio:checked + label {
-    background-color: #ff0;
+    background-color: var(--color-highlight);
     font-weight: bold;
 }
 
@@ -67,7 +107,7 @@
 }
 
 #dcTable th {
-    background-color: #ececec;
+    background-color: var(--color-shaded);
 }
 
 #dcTable td {
@@ -78,13 +118,18 @@
 #dcTable input[type=text] {
     text-align: right;
     border: none;
-    background-color: rgb(255, 255, 187);
-    box-shadow: 0 0 1px 1px #ececec inset;
+    box-shadow: 0 0 1px 1px #ececec inset; 
 }
 
-.syncButton
-{
+.syncButton {
     float: right;
     height: 16px;
     line-height: 16px;
+    background-color: #696969;
+    color: white;
+}
+
+.syncButton:hover {
+    background-color: #898989;
+    color: white;
 }
