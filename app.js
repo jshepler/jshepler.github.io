@@ -368,5 +368,21 @@
         else return "" + need + "%";
     });
 
+    vm.importBaseStats = () => {
+        fetch("http://localhost:8088/ngu/data/base_emr3")
+            .then(r => r.json())
+            .then(data => {
+                vm.base.energy.power(data.epower);
+                vm.base.energy.cap(data.ecap);
+                vm.base.energy.bars(data.ebars);
+                vm.base.magic.power(data.mpower);
+                vm.base.magic.cap(data.mcap);
+                vm.base.magic.bars(data.mbars);
+                vm.base.r3.power(data.r3power);
+                vm.base.r3.cap(data.r3cap);
+                vm.base.r3.bars(data.r3bars);
+            });
+    };
+
     ko.applyBindings(vm);
 })();
