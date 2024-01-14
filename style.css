@@ -3,19 +3,23 @@
     --color-fg: #000000;
     --color-shaded: #ececec;
     --color-highlight: #ffff00;
-    --color-text-input-bg: #ffffbb;
-    --color-text-input-fg: #000000;
-    --color-text-input-border: #ffffff;
+    --color-input-text-bg: #ffffbb;
+    --color-input-text-fg: #000000;
+    --color-input-text-border: #ffffff;
+    --color-button-bg: #f3f3f3;
+    --color-button-fg: #000000;
 }
   
 [data-theme="dark"] {
     --color-bg: #494949;
     --color-fg: #ffffff;
-    --color-shaded: #494949c9;
-    --color-highlight: #292929;
-    --color-text-input-bg: #000044;
-    --color-text-input-fg: #ffffff;
-    --color-text-input-border: #000000;
+    --color-shaded: #292929;
+    --color-highlight: #0059BF;
+    --color-input-text-bg: #000044;
+    --color-input-text-fg: #ffffff;
+    --color-input-text-border: #000000;
+    --color-button-bg: #3f3f3f;
+    --color-button-fg: #ffffff;
 }
 
 body {
@@ -23,11 +27,21 @@ body {
     color: var(--color-fg);
 }
 
-input {
-    background-color: var(--color-text-input-bg);
-    border-color: var(--color-text-input-border);
-    color: var(--color-text-input-fg);
- }
+button {
+    background-color: var(--color-button-bg);
+    color: var(--color-button-fg);
+    border-width: 1px;
+    border-radius: 3px;
+}
+
+ input[type=text], input[type=number] {
+    background-color: var(--color-input-text-bg);
+    border-color: var(--color-input-text-border);
+    color: var(--color-input-text-fg);
+    text-align: right;
+    border: none;
+    box-shadow: 0 0 1px 1px var(--color-shaded) inset;
+}
 
  select {
     background-color: var(--color-shaded);
@@ -94,7 +108,7 @@ input {
 }
 
 .fruitTierRadioLabel:hover {
-    background-color: #ececec;
+    background-color: var(--color-highlight);
 }
 
 .fruitTierRadio:checked + label {
@@ -115,21 +129,13 @@ input {
     text-align: center;
 }
 
-#dcTable input[type=text] {
-    text-align: right;
-    border: none;
-    box-shadow: 0 0 1px 1px #ececec inset; 
-}
-
 .syncButton {
     float: right;
     height: 16px;
     line-height: 16px;
-    background-color: #696969;
-    color: white;
 }
 
-.syncButton:hover {
+/* .syncButton:hover {
     background-color: #898989;
     color: white;
-}
+} */

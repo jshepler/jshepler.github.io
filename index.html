@@ -24,9 +24,9 @@
         </tr>
         <tr>
             <td>ratio:</td>
-            <td><input data-bind="textInput: pcbRatio_P" style="width:20px; text-align:center;" /></td>
-            <td><input data-bind="textInput: pcbRatio_C" style="width:60px; text-align:center;" /></td>
-            <td><input data-bind="textInput: pcbRatio_B" style="width:20px; text-align:center;" /></td>
+            <td><input type="text" data-bind="textInput: pcbRatio_P" style="width:20px; text-align:center;" /></td>
+            <td><input type="text" data-bind="textInput: pcbRatio_C" style="width:60px; text-align:center;" /></td>
+            <td><input type="text" data-bind="textInput: pcbRatio_B" style="width:20px; text-align:center;" /></td>
             <td><select data-bind="options: ratioPresets, optionsText: 'label', value: selectedRatioPreset, optionsCaption: 'preset'"></select></td>
         </tr>
     </table>
@@ -157,16 +157,16 @@
 
         <tr>
             <td>buy ALL for</td>
-            <td colspan="3">
-                <input data-bind="textInput: totalEnergyExpSpend"/>
+            <td colspan="3" style="padding: 0px;">
+                <input type='text' style="width: 300px;" data-bind="textInput: totalEnergyExpSpend"/>
             </td>
             <td>buy ALL for</td>
             <td colspan="3">
-                <input data-bind="textInput: totalMagicExpSpend"/>
+                <input type='text' style="width: 300px;" data-bind="textInput: totalMagicExpSpend"/>
             </td>
             <td>buy ALL for</td>
             <td colspan="3">
-                <input data-bind="textInput: totalR3ExpSpend"/>
+                <input type='text' style="width: 300px;" data-bind="textInput: totalR3ExpSpend"/>
             </td>
         </tr>
 
@@ -226,9 +226,9 @@
 
     <table id="dcTable">
         <tr>
-            <th colspan="2" style="background-color: white;"></th>
+            <th colspan="2" style="background-color: initial;"></th>
             <th colspan="3">Item DC</th>
-            <th style="background-color: white;"></th>
+            <th style="background-color: initial;"></th>
         </tr>
         <tr>
             <th>Total DC</th>
