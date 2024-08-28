@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>NGU tools</title>
+</head>
+<body>
+    <div>
+        <span style="float: right;">
+            <label for="cbDarkMode">Dark Mode</label>
+            <input type="checkbox" id="cbDarkMode" data-bind="checked: darkMode" />
+        </span>
+    </div>
+    <table>
+        <tr>
+            <th></th>
+            <th>P</th>
+            <th>C</th>
+            <th>B</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>ratio:</td>
+            <td><input type="text" data-bind="textInput: pcbRatio_P" style="width:20px; text-align:center;" /></td>
+            <td><input type="text" data-bind="textInput: pcbRatio_C" style="width:60px; text-align:center;" /></td>
+            <td><input type="text" data-bind="textInput: pcbRatio_B" style="width:20px; text-align:center;" /></td>
+            <td><select data-bind="options: ratioPresets, optionsText: 'label', value: selectedRatioPreset, optionsCaption: 'preset'"></select></td>
+        </tr>
+    </table>
+    
+    <table id="currentAmountsTable">
+        <tr><td colspan="12" style="text-align: left;"><button data-bind="click:importBaseStats">Import Base Stats</button> (requires running shep's NGU mod)</td></tr>
+        <tr>
+            <td></td>
+            <th colspan="3">energy</th>
+            <td></td>
+            <th colspan="3">magic</th>
+            <td></td>
+            <th colspan="3">R3</th>
+        </tr>
+        <tr>
+            <td></td>
+            <th>power
+                <button class="syncButton" data-bind="click: syncEP">^</button>
+            </th>
+            <th>cap
+                <button class="syncButton" data-bind="click: syncEC">^</button>
+            </th>
+            <th>bars
+                <button class="syncButton" data-bind="click: syncEB">^</button>
+            </th>
+            <td></td>
+            <th>power
+                <button class="syncButton" data-bind="click: syncMP">^</button>
+            </th>
+            <th>cap
+                <button class="syncButton" data-bind="click: syncMC">^</button>
+            </th>
+            <th>bars
+                <button class="syncButton" data-bind="click: syncMB">^</button>
+            </th>
+            <td></td>
+            <th>power
+                <button class="syncButton" data-bind="click: syncR3P">^</button>
+            </th>
+            <th>cap
+                <button class="syncButton" data-bind="click: syncR3C">^</button>
+            </th>
+            <th>bars
+                <button class="syncButton" data-bind="click: syncR3B">^</button>
+            </th>
+        </tr>
+        <tr>
+            <td>base</td>
+            <td><input type="number" data-bind="textInput: base.energy.power, attr: { step: pcbRatio_P }" /></td>
+            <td><input type="number" data-bind="textInput: base.energy.cap, attr: { step: pcbRatio_C }" /></td>
+            <td><input type="number" data-bind="textInput: base.energy.bars, attr: { step: pcbRatio_B }" /></td>
+            <td>base</td>
+            <td><input type="number" data-bind="textInput: base.magic.power, attr: { step: pcbRatio_P }" /></td>
+            <td><input type="number" step="500" data-bind="textInput: base.magic.cap, attr: { step: pcbRatio_C }" /></td>
+            <td><input type="number" data-bind="textInput: base.magic.bars, attr: { step: pcbRatio_B }" /></td>
+            <td>base</td>
+            <td><input type="number" data-bind="textInput: base.r3.power, attr: { step: pcbRatio_P }" /></td>
+            <td><input type="number" step="500" data-bind="textInput: base.r3.cap, attr: { step: pcbRatio_C }" /></td>
+            <td><input type="number" data-bind="textInput: base.r3.bars, attr: { step: pcbRatio_B }" /></td>
+        </tr>
+        <tr>
+            <td>should be</td>
+            <td data-bind="text: shouldBe.energy.power" class="padRight"></td>
+            <td data-bind="text: shouldBe.energy.cap" class="padRight"></td>
+            <td data-bind="text: shouldBe.energy.bars" class="padRight"></td>
+            <td>should be</td>
+            <td data-bind="text: shouldBe.magic.power" class="padRight"></td>
+            <td data-bind="text: shouldBe.magic.cap" class="padRight"></td>
+            <td data-bind="text: shouldBe.magic.bars" class="padRight"></td>
+            <td>should be</td>
+            <td data-bind="text: shouldBe.r3.power" class="padRight"></td>
+            <td data-bind="text: shouldBe.r3.cap" class="padRight"></td>
+            <td data-bind="text: shouldBe.r3.bars" class="padRight"></td>
+        </tr>
+        <tr>
+            <td>need</td>
+            <td data-bind="text: needs.energy.power" class="padRight"></td>
+            <td data-bind="text: needs.energy.cap" class="padRight"></td>
+            <td data-bind="text: needs.energy.bars" class="padRight"></td>
+            <td>need</td>
+            <td data-bind="text: needs.magic.power" class="padRight"></td>
+            <td data-bind="text: needs.magic.cap" class="padRight"></td>
+            <td data-bind="text: needs.magic.bars" class="padRight"></td>
+            <td>need</td>
+            <td data-bind="text: needs.r3.power" class="padRight"></td>
+            <td data-bind="text: needs.r3.cap" class="padRight"></td>
+            <td data-bind="text: needs.r3.bars" class="padRight"></td>
+        </tr>
+        <tr>
+            <td>exp</td>
+            <td data-bind="text: expNeeded.energy.power" class="padRight"></td>
+            <td data-bind="text: expNeeded.energy.cap" class="padRight"></td>
+            <td data-bind="text: expNeeded.energy.bars" class="padRight"></td>
+            <td>exp</td>
+            <td data-bind="text: expNeeded.magic.power" class="padRight"></td>
+            <td data-bind="text: expNeeded.magic.cap" class="padRight"></td>
+            <td data-bind="text: expNeeded.magic.bars" class="padRight"></td>
+            <td>exp</td>
+            <td data-bind="text: expNeeded.r3.power" class="padRight"></td>
+            <td data-bind="text: expNeeded.r3.cap" class="padRight"></td>
+            <td data-bind="text: expNeeded.r3.bars" class="padRight"></td>
+        </tr>
+    </table>
+
+    <table id="buyAmountsTable">
+        <tr>
+            <td></td>
+            <th colspan="3">energy</th>
+            <td></td>
+            <th colspan="3">magic</th>
+            <td></td>
+            <th colspan="3">R3</th>
+        </tr>
+        <tr>
+            <td></td>
+            <th>power</th>
+            <th>cap</th>
+            <th>bars</th>
+            <td></td>
+            <th>power</th>
+            <th>cap</th>
+            <th>bars</th>
+            <td></td>
+            <th>power</th>
+            <th>cap</th>
+            <th>bars</th>
+        </tr>
+
+        <tr>
+            <td>buy ALL for</td>
+            <td colspan="3" style="padding: 0px;">
+                <input type='text' style="width: 300px;" data-bind="textInput: totalEnergyExpSpend"/>
+            </td>
+            <td>buy ALL for</td>
+            <td colspan="3">
+                <input type='text' style="width: 300px;" data-bind="textInput: totalMagicExpSpend"/>
+            </td>
+            <td>buy ALL for</td>
+            <td colspan="3">
+                <input type='text' style="width: 300px;" data-bind="textInput: totalR3ExpSpend"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>custom amount</td>
+            <td data-bind="text: EPamount"></td>
+            <td data-bind="text: ECamount"></td>
+            <td data-bind="text: EBamount"></td>
+            <td>custom amount</td>
+            <td data-bind="text: MPamount"></td>
+            <td data-bind="text: MCamount"></td>
+            <td data-bind="text: MBamount"></td>
+            <td>custom amount</td>
+            <td data-bind="text: R3Pamount"></td>
+            <td data-bind="text: R3Camount"></td>
+            <td data-bind="text: R3Bamount"></td>
+        </tr>
+
+        <tr>
+            <td>buy for exp</td>
+            <td data-bind="text: EPexp"></td>
+            <td data-bind="text: ECexp"></td>
+            <td data-bind="text: EBexp"></td>
+            <td>buy for exp</td>
+            <td data-bind="text: MPexp"></td>
+            <td data-bind="text: MCexp"></td>
+            <td data-bind="text: MBexp"></td>
+            <td>buy for exp</td>
+            <td data-bind="text: R3Pexp"></td>
+            <td data-bind="text: R3Cexp"></td>
+            <td data-bind="text: R3Bexp"></td>
+        </tr>
+    </table>
+
+    <table id="fruitsTable">
+        <tr>
+            <td rowspan="2">fruit: <select data-bind="options: fruits, optionsText: '0', optionsValue: '1', value: selectedFruitMultiplier"></select></td>
+            <td style="text-align: right;">from tier: </td>
+            <!-- ko foreach: fruitTiers -->
+            <td>
+                <input type="radio" class="fruitTierRadio" name="fromTier" data-bind="attr: { id: 'fromTier' + $data }, checkedValue: $data, checked: $parent.selectedFruitUpgradeFromTier" />
+                <label class="fruitTierRadioLabel" data-bind="attr: { for: 'fromTier' + $data }, text: $data" />
+            </td>
+            <!-- /ko -->
+            <td rowspan="2" style="font-size: 2em;" data-bind="text: totalFruitUpgradeSeeds() + ' seeds'"></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">to tier: </td>
+            <!-- ko foreach: fruitTiers -->
+            <td>
+                <input type="radio" class="fruitTierRadio" name="toTier" data-bind="attr: { id: 'toTier' + $data }, checkedValue: $data, checked: $parent.selectedFruitUpgradeToTier" />
+                <label class="fruitTierRadioLabel" data-bind="attr: { for: 'toTier' + $data }, text: $data" />
+            </td>
+            <!-- /ko -->
+        </tr>
+    </table>
+
+    <table id="dcTable">
+        <tr>
+            <th colspan="2" style="background-color: initial;">DCM = drop chance modifier</th>
+            <th colspan="3">Item DC</th>
+            <th style="background-color: initial;"></th>
+        </tr>
+        <tr>
+            <th>Total DCM</th>
+            <th>cube-root</th>
+            <th>base</th>
+            <th>max</th>
+            <th>current</th>
+            <th>DCM for max</th>
+        </tr>
+        <tr>
+            <td><input type='text' data-bind="textInput: totalDCPct" onfocus="this.select()" style="width: 80px;" />%</td>
+            <td><input type="checkbox" data-bind="checked: cubeRootDC" /></td>
+            <td><input type='text' data-bind="textInput: itemBaseDCPct" onfocus="this.select()" style="width: 40px;" />%</td>
+            <td><input type='text' data-bind="textInput: itemMaxDCPct" onfocus="this.select()" style="width: 40px;" />%</td>
+            <td data-bind="text: itemCurrentDCPct() + '%'"></td>
+            <td data-bind="text: needTotalDCPctForMaxString"></td>
+        </tr>
+    </table>
+
+    <script type='text/javascript' src='knockout-3.5.1.js'></script>
+    <script src="app.js"></script>
+</body>
+</html>
