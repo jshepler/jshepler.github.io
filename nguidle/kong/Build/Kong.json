@@ -1,0 +1,11 @@
+{
+"TOTAL_MEMORY": 419430400,
+"dataUrl": "Kong.data.unityweb",
+"asmCodeUrl": "Kong.asm.code.unityweb",
+"asmMemoryUrl": "Kong.asm.memory.unityweb",
+"asmFrameworkUrl": "Kong.asm.framework.unityweb",
+"splashScreenStyle": "Dark",
+"backgroundColor": "#222C36",
+"width": 900,
+"height": 600
+}
